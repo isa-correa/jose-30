@@ -1,0 +1,4428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#F7F3E8">
+<title>¡Felices 30, José!</title>
+<style>
+:root {
+  --bg: #F7F3E8;
+  --text: #1D1D1D;
+  --text2: #2D2D2D;
+  --border: #1D1D1D;
+  --red: #E63946;
+  --green: #06A77D;
+  --pink: #FF006E;
+  --orange: #FB8500;
+  --yellow: #FFBE0B;
+  --blue: #3A86FF;
+  --white: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-y: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Dot grid texture */
+.dot-grid {
+  background-image: radial-gradient(#d4c5a9 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  opacity: 0.35;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Screen sections */
+.screen {
+  width: 100%;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Neo-brutalist elements */
+.card {
+  background: var(--white);
+  border: 3px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 5px 5px 0px var(--border);
+  padding: 1.25rem;
+}
+
+.card-sm {
+  box-shadow: 3px 3px 0px var(--border);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border: 2.5px solid var(--border);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border: 3px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 5px 5px 0px var(--border);
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--yellow);
+  -webkit-appearance: none;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0px var(--border);
+}
+@keyframes btn-press {
+  0%   { transform: translate(0,0);     box-shadow: 5px 5px 0px var(--border); }
+  35%  { transform: translate(3px,3px); box-shadow: 2px 2px 0px var(--border); }
+  70%  { transform: translate(3px,3px); box-shadow: 2px 2px 0px var(--border); }
+  100% { transform: translate(0,0);     box-shadow: 5px 5px 0px var(--border); }
+}
+.btn.pressed {
+  animation: btn-press 0.28s ease forwards;
+}
+
+.btn-green {
+  background: var(--green);
+  color: white;
+}
+
+.btn-orange {
+  background: var(--orange);
+  color: white;
+}
+
+.btn-pink {
+  background: var(--pink);
+  color: white;
+}
+
+.btn-blue {
+  background: var(--blue);
+  color: white;
+}
+
+/* Progress rail */
+.progress-rail {
+  position: fixed;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70vh;
+  background: rgba(29,29,29,0.15);
+  border-radius: 2px;
+  z-index: 100;
+}
+
+.progress-fill {
+  width: 100%;
+  background: var(--orange);
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
+
+/* Floating animations */
+/* 5 unique balloon float paths for natural movement */
+@keyframes float-a {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  20%     { transform: translateY(-18px) rotate(3deg); }
+  50%     { transform: translateY(-9px) rotate(-2deg); }
+  75%     { transform: translateY(-23px) rotate(1.5deg); }
+}
+@keyframes float-b {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  30%     { transform: translateY(-11px) rotate(-3deg); }
+  58%     { transform: translateY(-21px) rotate(2deg); }
+  82%     { transform: translateY(-5px) rotate(-1.5deg); }
+}
+@keyframes float-c {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  15%     { transform: translateY(-7px) rotate(2.5deg); }
+  45%     { transform: translateY(-26px) rotate(-2deg); }
+  70%     { transform: translateY(-14px) rotate(1deg); }
+}
+@keyframes float-d {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  25%     { transform: translateY(-20px) rotate(-1.5deg); }
+  55%     { transform: translateY(-4px) rotate(3.5deg); }
+  78%     { transform: translateY(-17px) rotate(-2deg); }
+}
+@keyframes float-e {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  35%     { transform: translateY(-13px) rotate(2deg); }
+  62%     { transform: translateY(-24px) rotate(-1deg); }
+  88%     { transform: translateY(-8px) rotate(2.5deg); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-15px) rotate(2deg); }
+  50% { transform: translateY(-8px) rotate(-1deg); }
+  75% { transform: translateY(-20px) rotate(1deg); }
+}
+
+@keyframes float-confetti {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.05); }
+}
+
+.balloon {
+  animation: float 6s ease-in-out infinite;
+}
+
+.balloon:nth-child(2) { animation-delay: -1.5s; animation-duration: 7s; }
+.balloon:nth-child(3) { animation-delay: -3s; animation-duration: 5.5s; }
+.balloon:nth-child(4) { animation-delay: -4.5s; animation-duration: 6.5s; }
+.balloon:nth-child(5) { animation-delay: -2s; animation-duration: 8s; }
+
+.confetti-piece {
+  animation: float-confetti 8s linear infinite;
+}
+
+.confetti-piece:nth-child(2n) { animation-delay: -2s; animation-duration: 10s; }
+.confetti-piece:nth-child(3n) { animation-delay: -4s; animation-duration: 7s; }
+.confetti-piece:nth-child(4n) { animation-delay: -1s; animation-duration: 9s; }
+.confetti-piece:nth-child(5n) { animation-delay: -6s; animation-duration: 11s; }
+
+/* Cover specific */
+.cover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.number-30 {
+  font-size: clamp(8rem, 45vw, 29rem);
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  text-shadow: 6px 6px 0px var(--border);
+  margin: 1rem 0;
+}
+
+/* Horizontal carousel */
+.carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 1.5rem 1.5rem;
+  scrollbar-width: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-card {
+  flex: 0 0 auto;
+  width: 82vw;
+  max-width: 340px;
+  height: min(560px, calc(100dvh - 155px));
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+/* Card polaroid photos */
+.card-photos-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.card-polaroid {
+  background: white;
+  border: 2px solid var(--border);
+  box-shadow: 3px 3px 0px var(--border);
+  padding: 6px 6px 22px;
+  border-radius: 3px;
+  position: relative;
+  transform: rotate(-1.5deg);
+  flex: 1;
+  max-width: 138px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.card-polaroid-alt {
+  transform: rotate(1.5deg);
+}
+.card-polaroid-center {
+  transform: rotate(-1deg);
+  width: 145px;
+  flex: none;
+}
+.card-washi-tape {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 48px;
+  height: 16px;
+  background: rgba(255,190,11,0.65);
+  border: 1.5px solid var(--border);
+}
+.card-washi-pink {
+  background: rgba(255,0,110,0.35);
+  transform: translateX(-50%) rotate(2deg);
+}
+.card-photo-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #e8e8e8;
+  border: 1.5px solid var(--border);
+}
+.card-photo-badge {
+  font-size: 0.6rem !important;
+  padding: 0.2rem 0.45rem !important;
+  border-radius: 8px !important;
+}
+.card-photo-center-wrap {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.card-text-body {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(29,29,29,0.25);
+  border: 1.5px solid var(--border);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.dot.active {
+  background: var(--orange);
+  transform: scale(1.3);
+}
+
+/* Year header */
+.year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem 0.5rem;
+}
+
+.year-number {
+  font-size: clamp(3rem, 12vw, 6rem);
+  font-weight: 900;
+  color: var(--orange);
+  text-shadow: 4px 4px 0px var(--border);
+  line-height: 1;
+}
+
+.year-badge {
+  background: var(--yellow);
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Card categories styling */
+.card-efemeride {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+}
+
+.badge-global { background: var(--blue); color: white; border-color: var(--border); }
+.badge-espana { background: var(--pink); color: white; border-color: var(--border); }
+
+/* Category icons */
+.cat-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.card-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.card-row-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.card-row-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text2);
+  margin-left: 0.25rem;
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.6;
+  text-align: center;
+}
+
+/* Polaroid */
+.polaroid {
+  background: white;
+  border: 3px solid var(--border);
+  box-shadow: 5px 5px 0px var(--border);
+  padding: 12px 12px 40px;
+  border-radius: 4px;
+  position: relative;
+  transform: rotate(-1deg);
+  max-width: 280px;
+  width: 70vw;
+}
+
+.polaroid-img {
+  aspect-ratio: 1/1;
+  background: #eee;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #999;
+  overflow: hidden;
+}
+
+.polaroid-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 80px;
+  height: 24px;
+  background: rgba(255, 190, 11, 0.6);
+  border: 1.5px solid var(--border);
+}
+
+/* Cake candles */
+.cake-container {
+  position: relative;
+  width: 200px;
+  height: 180px;
+  margin: 0 auto;
+}
+
+.candle {
+  position: absolute;
+  width: 4px;
+  height: 24px;
+  background: var(--orange);
+  border: 1.5px solid var(--border);
+  border-radius: 2px;
+  opacity: 0.3;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+}
+
+.candle.lit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.candle::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 10px;
+  background: radial-gradient(ellipse at center, #ffeb3b 0%, #ff9800 70%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: flicker 0.5s ease-in-out infinite;
+}
+
+.candle.lit::after {
+  opacity: 1;
+}
+
+/* Counter animation */
+.counter-number {
+  font-size: clamp(3rem, 12vw, 6rem);
+  font-weight: 900;
+  color: var(--blue);
+  text-shadow: 4px 4px 0px var(--border);
+  line-height: 1;
+}
+
+/* Editable message */
+.editable-message {
+  background: transparent;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  min-height: 80px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  width: 100%;
+  outline: none;
+  resize: none;
+}
+
+.editable-message:focus {
+  border-style: solid;
+  background: rgba(255,255,255,0.5);
+}
+
+/* Hint text */
+.hint {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.55;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Macro storytelling */
+.macro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+/* Utility */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.px-2 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.5rem; }
+.text-2xl { font-size: 2rem; }
+.text-red { color: var(--red); }
+.text-pink { color: var(--pink); }
+.text-orange { color: var(--orange); }
+.text-green { color: var(--green); }
+.text-blue { color: var(--blue); }
+.bg-yellow { background: var(--yellow); }
+.bg-green { background: var(--green); }
+.bg-pink { background: var(--pink); }
+
+/* Responsive for desktop */
+@media (min-width: 768px) {
+  .carousel-card {
+    width: 320px;
+  }
+  .cover-content, .macro-content {
+    padding: 2rem;
+  }
+}
+
+/* People animation — macro-1 */
+@keyframes person-pop {
+  0%   { opacity:0; transform:scale(0) rotate(-8deg); }
+  70%  { opacity:1; transform:scale(1.15) rotate(4deg); }
+  100% { opacity:1; transform:scale(1) rotate(0deg); }
+}
+@keyframes person-drift {
+  0%,100% { transform:translateY(0px) rotate(0deg); }
+  30%     { transform:translateY(-12px) rotate(3deg); }
+  65%     { transform:translateY(-6px) rotate(-2deg); }
+}
+.macro-person {
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  z-index:2;
+}
+.macro-person.visible {
+  animation:person-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.macro-person.floating svg {
+  animation:person-drift 5s ease-in-out infinite;
+}
+
+/* Tech images — macro-2 */
+@keyframes tech-pop {
+  0%   { opacity:0; transform:scale(0) rotate(-6deg); }
+  70%  { opacity:1; transform:scale(1.2) rotate(4deg); }
+  100% { opacity:1; transform:scale(1) rotate(0deg); }
+}
+@keyframes tech-drift {
+  0%,100% { transform:translateY(0px) rotate(0deg); }
+  33%     { transform:translateY(-10px) rotate(2.5deg); }
+  66%     { transform:translateY(-5px) rotate(-2deg); }
+}
+.macro-2-layout {
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  min-height:100dvh;
+  padding:2rem;
+  gap:2rem;
+  width:100%;
+  position:relative;
+}
+.tech-wrapper {
+  opacity:0;
+  flex:0 0 auto;
+}
+.tech-wrapper.visible {
+  animation:tech-pop 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.tech-wrapper.floating img {
+  animation:tech-drift 6s ease-in-out infinite;
+}
+.tech-wrapper img {
+  width:clamp(110px,14vw,210px);
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
+.macro-2-center {
+  flex:0 1 auto;
+  min-height:unset !important;
+  padding:0 !important;
+}
+@media (max-width:767px) {
+  .macro-2-layout {
+    flex-direction:row;
+    flex-wrap:wrap;
+    align-items:center;
+    align-content:center;
+    justify-content:center;
+    column-gap:calc(0.5rem + 20px);
+    row-gap:0.75rem;
+    padding:1.5rem 1rem;
+  }
+  #tech-nokia {
+    order:1;
+    width:31%;
+  }
+  #tech-ia {
+    order:2;
+    width:31%;
+  }
+  .macro-2-center {
+    order:3;
+    width:100%;
+    margin-top:0.25rem;
+  }
+  .tech-wrapper img {
+    width:100%;
+    max-width:none;
+  }
+  #tech-nokia img {
+    width:100%;
+    max-width:none;
+  }
+  .carousel-card {
+    height: min(780px, calc(100dvh - 130px));
+  }
+  .card-photos-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .card-polaroid {
+    max-width: 180px;
+    width: 180px;
+    flex: none;
+  }
+  .card-polaroid-alt {
+    transform: rotate(1.5deg);
+  }
+  .card-photos-row + .card-text-body,
+  .card-photo-center-wrap + .card-text-body {
+    margin-top: 1rem;
+  }
+}
+
+/* Audio button */
+.audio-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  box-shadow: 3px 3px 0px var(--border);
+  background: var(--pink);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+}
+
+.audio-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--border);
+}
+
+.hidden { display: none !important; }
+
+/* Gift icon animation */
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+.gift-icon {
+  animation: shake 2s ease-in-out infinite;
+}
+
+/* Date box */
+.date-box {
+  display: inline-block;
+  border: 2.5px solid var(--border);
+  padding: 0.5rem 1rem;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.6);
+  border-radius: 8px;
+}
+
+/* Year navigator button */
+@keyframes round-btn-press {
+  0%   { transform: translate(0,0);     box-shadow: 3px 3px 0px var(--border); }
+  35%  { transform: translate(2px,2px); box-shadow: none; }
+  70%  { transform: translate(2px,2px); box-shadow: none; }
+  100% { transform: translate(0,0);     box-shadow: 3px 3px 0px var(--border); }
+}
+.year-nav-btn.pressed {
+  animation: round-btn-press 0.28s ease forwards;
+}
+@keyframes btn-fade-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes btn-fade-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.7); }
+}
+.year-nav-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  opacity: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--orange);
+  border: 3px solid var(--border);
+  box-shadow: 3px 3px 0px var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.year-nav-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--border);
+}
+
+/* Overlay */
+.year-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(29,29,29,0.55);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.year-nav-overlay.open {
+  display: flex;
+}
+
+/* Modal card */
+.year-nav-card {
+  background: var(--bg);
+  border: 3px solid var(--border);
+  box-shadow: 6px 6px 0px var(--border);
+  border-radius: 20px;
+  padding: 1.5rem 1.25rem 1.25rem;
+  width: min(480px, 95vw);
+  max-height: 85dvh;
+  overflow-y: auto;
+  position: relative;
+}
+.year-nav-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border);
+  background: var(--white);
+  box-shadow: 2px 2px 0px var(--border);
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.year-nav-close:active {
+  transform: translate(2px,2px);
+  box-shadow: none;
+}
+.year-nav-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding-right: 2rem;
+}
+.year-nav-header h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem;
+}
+.year-nav-header span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.year-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.45rem;
+}
+.year-nav-cell {
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 0.5rem 0.2rem;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--border);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.year-nav-cell:hover {
+  transform: translate(-1px,-1px);
+  box-shadow: 3px 3px 0px var(--border);
+  background: #fff9ee;
+}
+.year-nav-cell:active {
+  transform: translate(2px,2px);
+  box-shadow: none;
+}
+@keyframes cell-press {
+  0%   { transform: translate(0,0);     box-shadow: 2px 2px 0px var(--border); }
+  35%  { transform: translate(2px,2px); box-shadow: none; }
+  70%  { transform: translate(2px,2px); box-shadow: none; }
+  100% { transform: translate(0,0);     box-shadow: 2px 2px 0px var(--border); }
+}
+.year-nav-cell.pressed {
+  animation: cell-press 0.25s ease forwards;
+}
+.year-nav-cell .cell-year {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+.year-nav-cell .cell-age {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--orange);
+  margin-top: 2px;
+}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+
+
+<!-- SVG Definitions -->
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <!-- Balloon -->
+    <symbol id="balloon" viewBox="0 0 60 80">
+      <ellipse cx="30" cy="35" rx="22" ry="28" fill="var(--c, #E63946)" stroke="#1D1D1D" stroke-width="1.5"/>
+      <polygon points="30,63 26,70 34,70" fill="var(--c, #E63946)" stroke="#1D1D1D" stroke-width="1.5"/>
+      <path d="M30,70 Q30,85 35,95" fill="none" stroke="#1D1D1D" stroke-width="1.2"/>
+      <ellipse cx="24" cy="28" rx="5" ry="8" fill="rgba(255,255,255,0.35)" stroke="none"/>
+    </symbol>
+    <!-- Confetti rectangle -->
+    <symbol id="conf-rect" viewBox="0 0 10 20">
+      <rect x="0" y="0" width="10" height="20" rx="2" fill="var(--c, #FF006E)" opacity="0.7"/>
+    </symbol>
+    <!-- Confetti circle -->
+    <symbol id="conf-circle" viewBox="0 0 12 12">
+      <circle cx="6" cy="6" r="5" fill="var(--c, #3A86FF)" opacity="0.7"/>
+    </symbol>
+    <!-- Calendar icon -->
+    <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </symbol>
+    <!-- Music note -->
+    <symbol id="icon-music" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+    </symbol>
+    <!-- Clapperboard -->
+    <symbol id="icon-cine" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 7h18M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M7 7l2-3h6l2 3"/>
+      <line x1="6" y1="11" x2="6.01" y2="11"/><line x1="10" y1="11" x2="10.01" y2="11"/>
+    </symbol>
+    <!-- T-shirt -->
+    <symbol id="icon-moda" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h3l2 2h2l2-2h3l2 3v15H4V7z"/>
+    </symbol>
+    <!-- Lightbulb -->
+    <symbol id="icon-avance" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 00-7 7c0 3 2 5 2 7h10c0-2 2-4 2-7a7 7 0 00-7-7z"/>
+    </symbol>
+    <!-- Broken heart -->
+    <symbol id="icon-despedidas" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21l-1-1C5 15 2 12 2 8a5 5 0 019-2.5A5 5 0 0122 8c0 4-3 7-8 12l-1 1z"/><line x1="12" y1="8" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/>
+    </symbol>
+    <!-- Star -->
+    <symbol id="icon-icono" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </symbol>
+    <!-- Smile -->
+    <symbol id="icon-buena" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+    </symbol>
+    <!-- Gift -->
+    <symbol id="icon-gift" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="8" width="18" height="4" rx="1"/><rect x="3" y="12" width="18" height="9" rx="1"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M7 8a3 3 0 010-6 3 3 0 015 0v6"/><path d="M17 8V2a3 3 0 00-5 0v6"/>
+    </symbol>
+    <!-- Person figure -->
+    <symbol id="person" viewBox="0 0 32 56">
+      <circle cx="16" cy="8" r="7" fill="var(--c,#3A86FF)" stroke="#1D1D1D" stroke-width="2"/>
+      <path d="M10,16 Q16,14 22,16 L20,34 Q16,36 12,34 Z" fill="var(--c,#3A86FF)" stroke="#1D1D1D" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M10,19 L4,30" stroke="#1D1D1D" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M22,19 L28,30" stroke="#1D1D1D" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M13,34 L9,52" stroke="#1D1D1D" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M19,34 L23,52" stroke="#1D1D1D" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<!-- SCREEN 0: COVER -->
+<section class="screen" id="cover">
+  <!-- Floating balloons -->
+  <div style="position:absolute;top:15%;left:8%;z-index:2;">
+    <svg class="balloon" width="50" height="70" style="--c:#E63946; animation:float-a 6.5s ease-in-out -1.2s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:18%;right:12%;z-index:2;">
+    <svg class="balloon" width="45" height="65" style="--c:#3A86FF; animation:float-b 5.8s ease-in-out -3.7s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:22%;left:65%;z-index:2;">
+    <svg class="balloon" width="55" height="75" style="--c:#06A77D; animation:float-c 7.2s ease-in-out -0.8s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:12%;left:40%;z-index:2;">
+    <svg class="balloon" width="40" height="60" style="--c:#FFBE0B; animation:float-d 5.3s ease-in-out -4.9s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:20%;left:20%;z-index:2;">
+    <svg class="balloon" width="48" height="68" style="--c:#FF006E; animation:float-e 7.8s ease-in-out -2.3s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:25%;left:50%;z-index:2;">
+    <svg class="balloon" width="38" height="56" style="--c:#FF006E; animation:float-a 5.6s ease-in-out -3.3s infinite;"><use href="#balloon"/></svg>
+  </div>
+
+  <!-- Confetti -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;">
+    <svg class="confetti-piece" style="position:absolute;top:-5%;left:10%;" width="10" height="20"><use href="#conf-rect" style="--c:#E63946;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-2%;left:30%;" width="12" height="12"><use href="#conf-circle" style="--c:#3A86FF;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-8%;left:55%;" width="10" height="20"><use href="#conf-rect" style="--c:#FFBE0B;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-3%;left:75%;" width="12" height="12"><use href="#conf-circle" style="--c:#06A77D;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-6%;left:90%;" width="10" height="20"><use href="#conf-rect" style="--c:#FF006E;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-4%;left:20%;" width="12" height="12"><use href="#conf-circle" style="--c:#FB8500;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-7%;left:45%;" width="10" height="20"><use href="#conf-rect" style="--c:#3A86FF;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-1%;left:65%;" width="12" height="12"><use href="#conf-circle" style="--c:#E63946;"/></svg>
+  </div>
+
+  <div class="cover-content">
+    <div class="number-30">30</div>
+    <div style="font-size:clamp(1.5rem,6vw,3rem);font-weight:800;">Joselito cumple treinta</div>
+    <div class="date-box mt-2">09.07.1996 → 09.07.2026</div>
+    <button class="btn btn-green mt-3" onclick="scrollToSection('macro-1')">Abrir regalo →</button>
+  </div>
+  <!-- Bottom balloons -->
+  <div style="position:absolute;bottom:8%;left:5%;z-index:2;">
+    <svg class="balloon" width="46" height="66" style="--c:#3A86FF; animation:float-c 6.4s ease-in-out -2.7s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;bottom:6%;left:25%;z-index:2;">
+    <svg class="balloon" width="38" height="56" style="--c:#FFBE0B; animation:float-e 5.9s ease-in-out -1.1s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;bottom:10%;left:47%;z-index:2;">
+    <svg class="balloon" width="50" height="70" style="--c:#E63946; animation:float-a 7.3s ease-in-out -4.6s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;bottom:5%;left:68%;z-index:2;">
+    <svg class="balloon" width="42" height="62" style="--c:#06A77D; animation:float-b 6.8s ease-in-out -0.9s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;bottom:9%;right:4%;z-index:2;">
+    <svg class="balloon" width="36" height="54" style="--c:#FF006E; animation:float-d 5.4s ease-in-out -3.8s infinite;"><use href="#balloon"/></svg>
+  </div>
+</section>
+
+<!-- SCREENS 1-3: MACRO STORYTELLING -->
+<section class="screen" id="macro-1">
+  <!-- People appearing around the counter -->
+  <div class="macro-person" style="top:8%;left:5%;"><svg width="38" height="60" style="--c:#E63946;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="top:6%;left:40%;"><svg width="32" height="52" style="--c:#06A77D;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="top:10%;right:6%;"><svg width="40" height="63" style="--c:#FFBE0B;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="top:38%;left:3%;"><svg width="35" height="56" style="--c:#FF006E;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="top:38%;right:3%;"><svg width="36" height="58" style="--c:#3A86FF;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="bottom:10%;left:6%;"><svg width="42" height="66" style="--c:#FB8500;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="bottom:8%;left:42%;"><svg width="33" height="53" style="--c:#E63946;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="bottom:10%;right:5%;"><svg width="38" height="60" style="--c:#06A77D;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="top:22%;left:18%;"><svg width="30" height="48" style="--c:#3A86FF;"><use href="#person"/></svg></div>
+  <div class="macro-person" style="top:22%;right:15%;"><svg width="34" height="55" style="--c:#FF006E;"><use href="#person"/></svg></div>
+  <div class="macro-content">
+    <div class="counter-number" id="counter-1">0</div>
+    <div style="font-size:1.25rem;font-weight:700;max-width:300px;">Millones de personas más en el mundo desde que nació</div>
+    <button class="btn btn-orange mt-2" onclick="scrollToSection('macro-2')">Continuar →</button>
+  </div>
+</section>
+
+<section class="screen" id="macro-2">
+  <div class="macro-2-layout">
+    <div class="tech-wrapper" id="tech-nokia">
+      <img src="storytelling/nokia.png" alt="Nokia 3310">
+    </div>
+    <div class="macro-content macro-2-center">
+      <div class="counter-number" id="counter-2">0</div>
+      <div style="font-size:1.25rem;font-weight:700;max-width:300px;">Años pasando del Nokia 3310 a la IA generativa</div>
+      <button class="btn btn-orange mt-2" onclick="scrollToSection('macro-3')">Continuar →</button>
+    </div>
+    <div class="tech-wrapper" id="tech-ia">
+      <img src="storytelling/ia.png" alt="IA generativa">
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="macro-3">
+  <div class="macro-content">
+    <svg class="gift-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#FB8500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="8" width="18" height="4" rx="1"/><rect x="3" y="12" width="18" height="9" rx="1"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M7 8a3 3 0 010-6 3 3 0 015 0v6"/><path d="M17 8V2a3 3 0 00-5 0v6"/>
+    </svg>
+    <div style="font-size:1.25rem;font-weight:700;">Y hoy toca celebrarlo todo</div>
+    <button class="btn btn-orange mt-2" onclick="scrollToSection('year-2026')">Ver su historia →</button>
+  </div>
+</section>
+
+<!-- SCREEN 4: 2026 SPECIAL -->
+<section class="screen" id="year-2026">
+  <!-- Balloons -->
+  <div style="position:absolute;top:6%;left:7%;z-index:2;">
+    <svg class="balloon" width="48" height="68" style="--c:#FF006E; animation:float-c 6.8s ease-in-out -2.1s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:9%;right:10%;z-index:2;">
+    <svg class="balloon" width="44" height="62" style="--c:#3A86FF; animation:float-e 5.5s ease-in-out -4.4s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:4%;left:42%;z-index:2;">
+    <svg class="balloon" width="38" height="56" style="--c:#FFBE0B; animation:float-a 7.5s ease-in-out -1.6s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:14%;left:68%;z-index:2;">
+    <svg class="balloon" width="52" height="72" style="--c:#06A77D; animation:float-b 6.2s ease-in-out -3.1s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:11%;left:22%;z-index:2;">
+    <svg class="balloon" width="42" height="60" style="--c:#E63946; animation:float-d 8.1s ease-in-out -0.5s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <!-- Confetti -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;">
+    <svg class="confetti-piece" style="position:absolute;top:-5%;left:8%;" width="10" height="20"><use href="#conf-rect" style="--c:#FF006E;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-3%;left:28%;" width="12" height="12"><use href="#conf-circle" style="--c:#3A86FF;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-7%;left:52%;" width="10" height="20"><use href="#conf-rect" style="--c:#FFBE0B;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-2%;left:72%;" width="12" height="12"><use href="#conf-circle" style="--c:#06A77D;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-6%;left:88%;" width="10" height="20"><use href="#conf-rect" style="--c:#E63946;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-4%;left:18%;" width="12" height="12"><use href="#conf-circle" style="--c:#FB8500;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-8%;left:44%;" width="10" height="20"><use href="#conf-rect" style="--c:#3A86FF;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-1%;left:62%;" width="12" height="12"><use href="#conf-circle" style="--c:#FF006E;"/></svg>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100dvh;padding:2rem 1.5rem;text-align:center;gap:1.5rem;position:relative;z-index:3;">
+    <div class="polaroid">
+      <div class="washi-tape"></div>
+      <div class="polaroid-img">
+        <span>FOTO DE JOSÉ</span>
+      </div>
+    </div>
+    <div style="font-size:clamp(2rem,8vw,4rem);font-weight:900;color:var(--pink);text-shadow:4px 4px 0px var(--border);">¡Felices 30!</div>
+    <p style="font-size:1.1rem;font-weight:600;max-width:320px;line-height:1.6;">Hoy, 9 de julio de 2026, Joselito cumple tres décadas. El mundo ha girado 30 veces y él ha estado aquí para verlo todo.</p>
+    <button class="btn btn-blue" onclick="scrollToSection('year-1996')">Comenzar el viaje →</button>
+  </div>
+</section>
+
+
+<section class="screen year-screen" data-year="1996" id="year-1996">
+  <div class="year-header">
+    <div class="year-number">1996</div>
+    <div class="badge year-badge">0 años</div>
+  </div>
+  <div class="carousel" id="carousel-1996">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 1996</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Macarena" — Los del Río</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Macarena" — Los del Río (La canción del verano)</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 1996</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Independence Day · El Jorobado de Notre Dame</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Friends · Expediente X</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 1996</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Princesa Diana de Gales y Will Smith por Independence Day.</p>
+      <div class="card-footer">Protagonistas de julio 1996</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 5 de julio nació en Escocia la oveja Dolly — el primer mamífero clonado a partir de una célula adulta. Un hito histórico de la biología.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-1996">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="1997" id="year-1997">
+  <div class="year-header">
+    <div class="year-number">1997</div>
+    <div class="badge year-badge">1 años</div>
+  </div>
+  <div class="carousel" id="carousel-1997">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 1997</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"I'll Be Missing You" — Puff Daddy & Faith Evans</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Barbie Girl" — Aqua · La Oreja de Van Gogh irrumpía con fuerza</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 1997</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Men in Black · Contact · Air Force One</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Médico de familia arrasaba en España</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 1997</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Princesa Diana (separación de Carlos el 15 de julio) y Will Smith por Men in Black.</p>
+      <div class="card-footer">Protagonistas de julio 1997</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 4 de julio la sonda Mars Pathfinder aterrizó en Marte, desplegando el rover Sojourner — la primera misión en rodar sobre el planeta rojo.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-1997">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="1998" id="year-1998">
+  <div class="year-header">
+    <div class="year-number">1998</div>
+    <div class="badge year-badge">2 años</div>
+  </div>
+  <div class="carousel" id="carousel-1998">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 1998</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"The Boy Is Mine" — Brandy & Monica</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Corazón partío" — Alejandro Sanz</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 1998</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Armageddon · Salvar al soldado Ryan</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Ally McBeal · Expediente X en su apogeo</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 1998</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Ronaldo (brasileño) y Zinedine Zidane, estrellas del Mundial de Francia 98.</p>
+      <div class="card-footer">Protagonistas de julio 1998</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Francia gana su primer Mundial de Fútbol el 12 de julio, derrotando a Brasil 3-0 con dos goles de Zidane.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-1998">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="1999" id="year-1999">
+  <div class="year-header">
+    <div class="year-number">1999</div>
+    <div class="badge year-badge">3 años</div>
+  </div>
+  <div class="carousel" id="carousel-1999">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 1999</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Livin' la Vida Loca" — Ricky Martin</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Livin' la Vida Loca" · "Bailamos" — Enrique Iglesias</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 1999</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Tarzán (Disney) · American Pie (9 de julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Los Soprano · Friends</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 1999</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Ricky Martin, rey del pop latino, y JFK Jr. (accidente aéreo el 16 de julio, todas las portadas).</p>
+      <div class="card-footer">Protagonistas de julio 1999</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 23 de julio el Observatorio de Rayos X Chandra fue desplegado desde el transbordador Columbia — una revolución para la astronomía.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-1999">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2000" id="year-2000">
+  <div class="year-header">
+    <div class="year-number">2000</div>
+    <div class="badge year-badge">4 años</div>
+  </div>
+  <div class="carousel" id="carousel-2000">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2000</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"It's Gonna Be Me" — *NSYNC</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">El Canto del Loco · Eiffel 65 ("Blue")</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2000</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">The Perfect Storm · Scary Movie · X-Men (14 de julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Gran Hermano España (primera edición)</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2000</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Britney Spears en su gira "Oops!..." y los finalistas de Gran Hermano España.</p>
+      <div class="card-footer">Protagonistas de julio 2000</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 26 de junio se anunció el primer borrador completo del Genoma Humano — la comunidad científica celebró durante todo julio este hito.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2000">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2001" id="year-2001">
+  <div class="year-header">
+    <div class="year-number">2001</div>
+    <div class="badge year-badge">5 años</div>
+  </div>
+  <div class="carousel" id="carousel-2001">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2001</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Lady Marmalade" — Aguilera, Lil' Kim, Mya & Pink</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Escondidos" — La Oreja de Van Gogh · Antonio Vega</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2001</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">A.I. (Spielberg) · Shrek · Planeta de los Simios (27 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Friends · Los Serrano</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2001</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Shakira preparando su salto internacional y Nicole Kidman, recién separada de Tom Cruise.</p>
+      <div class="card-footer">Protagonistas de julio 2001</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 16 de julio China fue elegida sede de los JJOO 2008, y el 20 de julio se lanzó Wikipedia en español.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2001">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2002" id="year-2002">
+  <div class="year-header">
+    <div class="year-number">2002</div>
+    <div class="badge year-badge">6 años</div>
+  </div>
+  <div class="carousel" id="carousel-2002">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2002</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Hot in Herre" — Nelly</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Aserejé" — Las Ketchup (la canción del verano)</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2002</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Men in Black II · Minority Report · The Bourne Identity</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: OT (Operación Triunfo) · CSI</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2002</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Las Ketchup y los concursantes de OT1 (Bisbal, Bustamante, Chenoa). Globalmente, Ronaldo tras ganar el Mundial.</p>
+      <div class="card-footer">Protagonistas de julio 2002</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Brasil ganó el Mundial de Fútbol 2002 el 30 de junio en Corea-Japón, con Ronaldo como gran estrella. Todo julio fue de celebración.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2002">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2003" id="year-2003">
+  <div class="year-header">
+    <div class="year-number">2003</div>
+    <div class="badge year-badge">7 años</div>
+  </div>
+  <div class="carousel" id="carousel-2003">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2003</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Crazy in Love" — Beyoncé ft. Jay-Z</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Tu peor error" — La Oreja de Van Gogh · Estopa</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2003</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Piratas del Caribe (9 julio, ¡estreno en el cumple!) · Terminator 3</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: 7 vidas</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2003</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Johnny Depp como Jack Sparrow y Beyoncé, recién lanzada su carrera solista con "Dangerously in Love".</p>
+      <div class="card-footer">Protagonistas de julio 2003</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 26 de julio la NASA publicó los datos del WMAP, fijando con precisión la edad del universo: 13.800 millones de años.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2003">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2004" id="year-2004">
+  <div class="year-header">
+    <div class="year-number">2004</div>
+    <div class="badge year-badge">8 años</div>
+  </div>
+  <div class="carousel" id="carousel-2004">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2004</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Burn" — Usher</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Rosas" — La Oreja de Van Gogh · "Dragostea Din Tei" — O-Zone (Numa Numa)</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2004</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Spider-Man 2 (30 junio) · I, Robot (16 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Los Serrano · Aquí no hay quien viva</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2004</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Paris Hilton en el pico de su fama mediática y Michael Phelps preparando los JJOO de Atenas.</p>
+      <div class="card-footer">Protagonistas de julio 2004</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 1 de julio la sonda Cassini-Huygens de la NASA/ESA entró en la órbita de Saturno, iniciando una misión científica histórica.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2004">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2005" id="year-2005">
+  <div class="year-header">
+    <div class="year-number">2005</div>
+    <div class="badge year-badge">9 años</div>
+  </div>
+  <div class="carousel" id="carousel-2005">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2005</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"We Belong Together" — Mariah Carey (14 semanas nº1)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"La tortura" — Shakira & Alejandro Sanz · "Días de verano" — Amaral</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2005</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">La guerra de los mundos (Spielberg) · Charlie y la fábrica de chocolate (15 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Perdidos (Lost) · House</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2005</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Tom Cruise (saltando en el sofá de Oprah) y Shakira, omnipresente con "La tortura".</p>
+      <div class="card-footer">Protagonistas de julio 2005</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 4 de julio la sonda Deep Impact de la NASA impactó contra el cometa Tempel 1, logrando por primera vez analizar el interior de un cometa.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2005">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2006" id="year-2006">
+  <div class="year-header">
+    <div class="year-number">2006</div>
+    <div class="badge year-badge">10 años</div>
+  </div>
+  <div class="carousel" id="carousel-2006">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2006</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Hips Don't Lie" — Shakira ft. Wyclef Jean</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Hips Don't Lie" — Shakira (récord: 9 semanas nº1 en Los 40)</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2006</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Piratas del Caribe: El cofre del hombre muerto (7 julio) · Superman Returns</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Perdidos · House · Aquí no hay quien viva</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2006</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Zidane por el famoso cabezazo a Materazzi en la final del Mundial (9 de julio) y Shakira.</p>
+      <div class="card-footer">Protagonistas de julio 2006</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">¡Italia ganó el Mundial el 9 de julio, justo el día del cumple de José! Derrota a Francia por penaltis tras un 1-1 épico.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2006">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2007" id="year-2007">
+  <div class="year-header">
+    <div class="year-number">2007</div>
+    <div class="badge year-badge">11 años</div>
+  </div>
+  <div class="carousel" id="carousel-2007">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2007</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Umbrella" — Rihanna ft. Jay-Z (7 semanas nº1)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Las de la intuición" — Shakira (8 semanas nº1 en Los 40)</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2007</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Harry Potter y la Orden del Fénix (11 julio) · Transformers · Los Simpson: La película (27 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Mad Men debutó el 19 de julio — hito histórico</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2007</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">J.K. Rowling con el último libro de Harry Potter (21 julio) y Paris Hilton tras salir de la cárcel.</p>
+      <div class="card-footer">Protagonistas de julio 2007</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 7 de julio se anunciaron las 7 nuevas maravillas del mundo moderno. El 21 de julio, "Harry Potter y las Reliquias de la Muerte" cerró la saga.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2007">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2008" id="year-2008">
+  <div class="year-header">
+    <div class="year-number">2008</div>
+    <div class="badge year-badge">12 años</div>
+  </div>
+  <div class="carousel" id="carousel-2008">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2008</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"I Kissed a Girl" — Katy Perry · "Viva la Vida" — Coldplay</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Ella elle l'a" — Kate Ryan · El Canto del Loco</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2008</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">El caballero oscuro (18 julio, Heath Ledger) · Hancock · Mamma Mia!</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Mad Men T2 · Breaking Bad debutó en enero</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2008</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Heath Ledger — su Joker póstumo fue lo más comentado del verano — y Barack Obama en plena campaña.</p>
+      <div class="card-footer">Protagonistas de julio 2008</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 20 de julio se conmemoraron los 40 años del Apolo 11 con celebraciones mundiales. El 13 de julio se fundó la Unión por el Mediterráneo.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2008">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2009" id="year-2009">
+  <div class="year-header">
+    <div class="year-number">2009</div>
+    <div class="badge year-badge">13 años</div>
+  </div>
+  <div class="carousel" id="carousel-2009">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2009</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"I Gotta Feeling" — The Black Eyed Peas (14 semanas nº1)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Colgando en tus manos" — Carlos Baute & Marta Sánchez</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2009</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Harry Potter y el misterio del príncipe (15 julio) · Ice Age 3</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Glee debutó el 19 de mayo — ya era fenómeno en julio</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2009</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Michael Jackson: fallecido el 25 de junio, su funeral público en el Staples Center el 7 de julio fue seguido por mil millones de personas.</p>
+      <div class="card-footer">Protagonistas de julio 2009</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 22 de julio se produjo el eclipse solar total más largo del siglo XXI (6 min 39 s), visible en gran parte de Asia.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2009">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2010" id="year-2010">
+  <div class="year-header">
+    <div class="year-number">2010</div>
+    <div class="badge year-badge">14 años</div>
+  </div>
+  <div class="carousel" id="carousel-2010">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2010</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"California Gurls" — Katy Perry ft. Snoop Dogg</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Waka Waka (Esto es África)" — Shakira (himno del Mundial)</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2010</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Origen / Inception (16 julio, Nolan) · Toy Story 3</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Mad Men · Breaking Bad · True Blood</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2010</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Shakira con "Waka Waka" y Andrés Iniesta, autor del gol campeón.</p>
+      <div class="card-footer">Protagonistas de julio 2010</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">¡España ganó su primer Mundial el 11 de julio en Sudáfrica! Gol de Iniesta en la prórroga contra Países Bajos. Celebración histórica.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2010">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2011" id="year-2011">
+  <div class="year-header">
+    <div class="year-number">2011</div>
+    <div class="badge year-badge">15 años</div>
+  </div>
+  <div class="carousel" id="carousel-2011">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2011</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Rolling in the Deep" — Adele · "Party Rock Anthem" — LMFAO</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Bailando por ahí" — Juan Magán · "Danza Kuduro" — Don Omar</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2011</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Harry Potter: Las Reliquias de la Muerte Parte 2 (15 julio) · Transformers 3</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Juego de Tronos (debut en abril) · Breaking Bad T4</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2011</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Amy Winehouse (falleció el 23 de julio a los 27 años) y Kate Middleton, recién casada con el Príncipe William.</p>
+      <div class="card-footer">Protagonistas de julio 2011</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 8 de julio despegó el último vuelo del Transbordador Espacial (Atlantis, misión STS-135), cerrando una era histórica de la NASA.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2011">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2012" id="year-2012">
+  <div class="year-header">
+    <div class="year-number">2012</div>
+    <div class="badge year-badge">16 años</div>
+  </div>
+  <div class="carousel" id="carousel-2012">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2012</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Call Me Maybe" — Carly Rae Jepsen (nº1 en más de 20 países)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Ai Se Eu Te Pego" — Michel Teló · "Call Me Maybe"</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2012</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">The Amazing Spider-Man (3 julio) · El Caballero Oscuro: La Leyenda Renace (20 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Breaking Bad T5 · Juego de Tronos T2</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2012</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Tom Cruise y Katie Holmes (divorcio el 29 de junio, el cotilleo del verano) y los atletas preparando los JJOO de Londres.</p>
+      <div class="card-footer">Protagonistas de julio 2012</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 4 de julio el CERN anunció el descubrimiento del bosón de Higgs. El 27 de julio se inauguraron los Juegos Olímpicos de Londres.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2012">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2013" id="year-2013">
+  <div class="year-header">
+    <div class="year-number">2013</div>
+    <div class="badge year-badge">17 años</div>
+  </div>
+  <div class="carousel" id="carousel-2013">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2013</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Blurred Lines" — Robin Thicke ft. Pharrell · "Get Lucky" — Daft Punk</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Wake Me Up" — Avicii · Pablo Alborán · Melendi</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2013</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Pacific Rim (12 julio) · Gru, mi villano favorito 2 (3 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: GOT (Boda Roja en junio) · Breaking Bad: temporada final</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2013</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Kate Middleton y el príncipe William — nació el príncipe George el 22 de julio. Y Edward Snowden, en plena revelación de espionaje de la NSA.</p>
+      <div class="card-footer">Protagonistas de julio 2013</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 22 de julio nació el príncipe George de Cambridge, heredero de la Corona británica. El Royal Baby Watch paralizó al mundo.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2013">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2014" id="year-2014">
+  <div class="year-header">
+    <div class="year-number">2014</div>
+    <div class="badge year-badge">18 años</div>
+  </div>
+  <div class="carousel" id="carousel-2014">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2014</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Happy" — Pharrell Williams · "Fancy" — Iggy Azalea</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Bailando" — Enrique Iglesias ft. Descemer Bueno & Gente de Zona</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2014</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">El Amanecer del Planeta de los Simios (11 julio) · Cómo entrenar a tu dragón 2</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Juego de Tronos T4 · Orange Is the New Black T2</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2014</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Mario Götze, héroe alemán en la final del Mundial (13 julio), y Cristiano Ronaldo / James Rodríguez.</p>
+      <div class="card-footer">Protagonistas de julio 2014</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Alemania ganó el Mundial de Brasil 2014 el 13 de julio, derrotando a Argentina 1-0 con gol de Mario Götze en la prórroga.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2014">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2015" id="year-2015">
+  <div class="year-header">
+    <div class="year-number">2015</div>
+    <div class="badge year-badge">19 años</div>
+  </div>
+  <div class="carousel" id="carousel-2015">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2015</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Cheerleader" — OMI · "Bad Blood" — Taylor Swift ft. Kendrick Lamar</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"El perdón" — Nicky Jam & Enrique Iglesias · "Lean On" — Major Lazer</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2015</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Minions (10 julio) · Ant-Man (17 julio) · Del revés / Inside Out (Pixar)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Juego de Tronos T5 · Mr. Robot (debut 24 junio)</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2015</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Donald Trump (anunció candidatura el 16 de junio, ya en todos los titulares) y Caitlyn Jenner.</p>
+      <div class="card-footer">Protagonistas de julio 2015</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 14 de julio la sonda New Horizons realizó el primer sobrevuelo histórico de Plutón. Ese mismo día se firmó el acuerdo nuclear con Irán.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2015">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2016" id="year-2016">
+  <div class="year-header">
+    <div class="year-number">2016</div>
+    <div class="badge year-badge">20 años</div>
+  </div>
+  <div class="carousel" id="carousel-2016">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2016</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"One Dance" — Drake ft. Wizkid (10 semanas nº1) · "Can't Stop the Feeling" — Justin Timberlake</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Borró Cassette" · "Safari" — J Balvin</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2016</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">La vida secreta de tus mascotas (8 julio) · Ghostbusters (15 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Stranger Things (Netflix, estreno 15 julio — fenómeno instantáneo)</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2016</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Cristiano Ronaldo — Portugal campeona de Eurocopa el 10 de julio — y el elenco de Stranger Things.</p>
+      <div class="card-footer">Protagonistas de julio 2016</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 10 de julio Portugal ganó su primera Eurocopa venciendo a Francia 1-0. El 4 de julio la sonda Juno de la NASA entró en la órbita de Júpiter.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2016">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2017" id="year-2017">
+  <div class="year-header">
+    <div class="year-number">2017</div>
+    <div class="badge year-badge">21 años</div>
+  </div>
+  <div class="carousel" id="carousel-2017">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2017</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Despacito" — Luis Fonsi & Daddy Yankee ft. Bieber (16 semanas nº1, récord histórico)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Despacito" nº1 en España también · "Súbeme la radio" — Enrique Iglesias · "Mi gente" — J Balvin</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2017</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Spider-Man: Homecoming (7 julio) · Dunkerque (21 julio, Nolan)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Juego de Tronos T7 — estreno global el 16 de julio</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2017</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Luis Fonsi y Daddy Yankee — "Despacito" fue el vídeo más visto de YouTube ese verano. Emmanuel Macron, recién elegido.</p>
+      <div class="card-footer">Protagonistas de julio 2017</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 7 de julio, más de 120 países adoptaron en la ONU el Tratado sobre la Prohibición de las Armas Nucleares.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2017">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2018" id="year-2018">
+  <div class="year-header">
+    <div class="year-number">2018</div>
+    <div class="badge year-badge">22 años</div>
+  </div>
+  <div class="carousel" id="carousel-2018">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2018</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"In My Feelings" — Drake (viralizado por el #KikiChallenge)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Clandestino" — Shakira & Maluma · "Dura" — Daddy Yankee</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2018</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Ant-Man y la Avispa (6 julio) · Misión Imposible: Fallout (27 julio) · Mamma Mia! 2 (20 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: The Handmaid's Tale T2 · Stranger Things T2</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2018</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Kylian Mbappé, joven estrella francesa ganadora del Mundial a los 19 años, y los 12 niños rescatados de la cueva tailandesa.</p>
+      <div class="card-footer">Protagonistas de julio 2018</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 10 de julio culminó el rescate de los 12 niños y su entrenador de la cueva de Tham Luang (Tailandia), tras 18 días atrapados. El 15 de julio Francia ganó el Mundial.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2018">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2019" id="year-2019">
+  <div class="year-header">
+    <div class="year-number">2019</div>
+    <div class="badge year-badge">23 años</div>
+  </div>
+  <div class="carousel" id="carousel-2019">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2019</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Old Town Road" — Lil Nas X ft. Billy Ray Cyrus (récord: 19 semanas nº1)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Con calma" — Daddy Yankee · "Señorita" — Shawn Mendes & Camila Cabello</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2019</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">El Rey León live action (19 julio) · Spider-Man: Lejos de casa (2 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Stranger Things T3 (4 julio) — fenómeno absoluto</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2019</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Greta Thunberg en plena ascensión como activista climática y Messi / Brasil (Copa América ganada el 7 de julio).</p>
+      <div class="card-footer">Protagonistas de julio 2019</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 20 de julio se conmemoraron los 50 años de la llegada del Apolo 11 a la Luna, con celebraciones mundiales. Brasil ganó la Copa América el 7 de julio.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2019">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2020" id="year-2020">
+  <div class="year-header">
+    <div class="year-number">2020</div>
+    <div class="badge year-badge">24 años</div>
+  </div>
+  <div class="carousel" id="carousel-2020">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2020</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Rockstar" — DaBaby ft. Roddy Ricch · "Blinding Lights" — The Weeknd</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Hawái" — Maluma (lanzada el 30 de julio) · "Relación" — Sech</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2020</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Hamilton" en Disney+ (3 julio) · Dark T3 (27 junio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: La casa de papel T4 — fenómeno global</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2020</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Kanye West (anunció candidatura presidencial el 4 de julio) y los sanitarios de todo el mundo en primera línea del COVID.</p>
+      <div class="card-footer">Protagonistas de julio 2020</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 20 de julio los Emiratos Árabes Unidos lanzaron su primera misión a Marte (sonda Hope). El 23 de julio China lanzó Tianwen-1.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2020">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2021" id="year-2021">
+  <div class="year-header">
+    <div class="year-number">2021</div>
+    <div class="badge year-badge">25 años</div>
+  </div>
+  <div class="carousel" id="carousel-2021">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2021</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Butter" — BTS (10 semanas nº1) · "Good 4 U" — Olivia Rodrigo</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Pareja del año" — Sebastián Yatra & Myke Towers · "Todo de ti" — Rauw Alejandro</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2021</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Black Widow (9 julio, ¡el día del cumple!) · Space Jam 2 (16 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Loki (Disney+) · The White Lotus (debut 11 julio)</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2021</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Simone Biles — retirada histórica de los JJOO de Tokio por su salud mental — y Jeff Bezos con su vuelo espacial el 20 de julio.</p>
+      <div class="card-footer">Protagonistas de julio 2021</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 11 de julio Branson al espacio, el 20 de julio Bezos al espacio con Blue Origin. Nació la era del turismo espacial. El 23 de julio, inauguración de los JJOO de Tokio.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2021">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2022" id="year-2022">
+  <div class="year-header">
+    <div class="year-number">2022</div>
+    <div class="badge year-badge">26 años</div>
+  </div>
+  <div class="carousel" id="carousel-2022">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2022</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"As It Was" — Harry Styles · "Running Up That Hill" — Kate Bush (resurgió con Stranger Things)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Despechá" — Rosalía (lanzada el 28 de julio, himno del verano español)</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2022</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Thor: Love and Thunder (8 julio) · Minions: Nace un villano (1 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Stranger Things T4 Vol.2 (1 julio) — Max y Kate Bush</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2022</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Rosalía, en pleno Motomami Tour, y Shinzo Abe, ex primer ministro japonés asesinado el 8 de julio, un día antes del cumple.</p>
+      <div class="card-footer">Protagonistas de julio 2022</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 12 de julio la NASA publicó las primeras imágenes del telescopio espacial James Webb, mostrando el universo con una nitidez nunca vista.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2022">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2023" id="year-2023">
+  <div class="year-header">
+    <div class="year-number">2023</div>
+    <div class="badge year-badge">27 años</div>
+  </div>
+  <div class="carousel" id="carousel-2023">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2023</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Flowers" — Miley Cyrus · "Ella Baila Sola" — Peso Pluma & Eslabón Armado</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Ella Baila Sola" · "un x100to" — Grupo Frontera & Bad Bunny</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2023</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Barbenheimer: Barbie + Oppenheimer (21 julio) — fenómeno cinematográfico histórico</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: The Bear T2 (22 junio) · Misión Imposible (12 julio)</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2023</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Margot Robbie y Cillian Murphy por el Barbenheimer, y Lionel Messi — fichó por Inter Miami el 16 de julio.</p>
+      <div class="card-footer">Protagonistas de julio 2023</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 14 de julio India lanzó Chandrayaan-3 hacia la Luna (aterrizó en el polo sur en agosto, la primera nación en lograrlo). El 21 de julio, el Barbenheimer hizo historia en los cines.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2023">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2024" id="year-2024">
+  <div class="year-header">
+    <div class="year-number">2024</div>
+    <div class="badge year-badge">28 años</div>
+  </div>
+  <div class="carousel" id="carousel-2024">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2024</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"I Had Some Help" — Post Malone · "Espresso" — Sabrina Carpenter</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Bubalu" — Feid · "Gata Only" — FloyyMenor & Cris MJ</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2024</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">Del revés 2 / Inside Out 2 (Pixar, la más taquillera del año) · Deadpool & Wolverine (26 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: House of the Dragon T2 · The Bear T3</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2024</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Donald Trump (intento de asesinato el 13 de julio en Butler, PA), Joe Biden (retiró su candidatura el 21 de julio) y Taylor Swift en plena Eras Tour.</p>
+      <div class="card-footer">Protagonistas de julio 2024</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 26 de julio se inauguraron los Juegos Olímpicos de París 2024 — primera ceremonia fuera de un estadio, con desfile histórico por el Sena.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2024">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<section class="screen year-screen" data-year="2025" id="year-2025">
+  <div class="year-header">
+    <div class="year-number">2025</div>
+    <div class="badge year-badge">29 años</div>
+  </div>
+  <div class="carousel" id="carousel-2025">
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-music"/></svg>
+        <span class="card-title">Música julio 2025</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Luther" — Kendrick Lamar & SZA · "Die With A Smile" — Lady Gaga & Bruno Mars</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">"Bon Bon" — Aitana · "DtMF" — Bad Bunny</span></div>
+      </div>
+      <div class="card-footer">Sonaba en julio de 2025</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-cine"/></svg>
+        <span class="card-title">Cine &amp; TV</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-global card-photo-badge">Global</span>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+          <span class="badge badge-espana card-photo-badge">España</span>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label"><span class="badge badge-global">Global</span><span class="card-row-text">"Superman" (11 julio, nuevo DCU de James Gunn) · "Jurassic World: Renace" (2 julio)</span></div>
+        <div class="card-row-label"><span class="badge badge-espana">España</span><span class="card-row-text">TV: Squid Game T3 (27 junio) · The Bear T4 (25 junio)</span></div>
+      </div>
+      <div class="card-footer">Cartelera de julio 2025</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-icono"/></svg>
+        <span class="card-title">Famoso del mes</span>
+      </div>
+      <div class="card-photos-row">
+        <div class="card-polaroid">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+        <div class="card-polaroid card-polaroid-alt">
+          <div class="card-washi-tape card-washi-pink"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">Lamine Yamal, superestrella del fútbol (cumpleaños el 13 de julio), y Donald Trump por su nuevo mandato.</p>
+      <div class="card-footer">Protagonistas de julio 2025</div>
+    </div>
+
+    <div class="carousel-card card card-sm">
+      <div class="card-title-row">
+        <svg class="cat-icon"><use href="#icon-buena"/></svg>
+        <span class="card-title">Buena noticia</span>
+      </div>
+      <div class="card-photo-center-wrap">
+        <div class="card-polaroid card-polaroid-center">
+          <div class="card-washi-tape"></div>
+          <div class="card-photo-img"></div>
+        </div>
+      </div>
+      <p class="card-text-body">El 26 de julio se celebró La Velada del Año 5 de Ibai Llanos en el Estadio La Cartuja de Sevilla con 80.000 asistentes y actuación de Los del Río.</p>
+      <div class="card-footer">Motivo para sonreír</div>
+    </div>
+
+  </div>
+  <div class="carousel-dots" id="dots-2025">
+    <div class="dot" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+  </div>
+  <div class="hint">Desliza horizontalmente →</div>
+</section>
+
+<!-- SCREEN 35: CIERRE -->
+<section class="screen" id="closing" style="position:relative;overflow:hidden;">
+  <!-- Floating balloons -->
+  <div style="position:absolute;top:5%;left:10%;z-index:2;">
+    <svg class="balloon" width="50" height="70" style="--c:#E63946; animation:float-b 6.9s ease-in-out -2.8s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:10%;right:15%;z-index:2;">
+    <svg class="balloon" width="45" height="65" style="--c:#3A86FF; animation:float-d 5.6s ease-in-out -1.3s infinite;"><use href="#balloon"/></svg>
+  </div>
+  <div style="position:absolute;top:8%;left:70%;z-index:2;">
+    <svg class="balloon" width="55" height="75" style="--c:#FF006E; animation:float-a 7.3s ease-in-out -4.2s infinite;"><use href="#balloon"/></svg>
+  </div>
+
+  <!-- Confetti -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;">
+    <svg class="confetti-piece" style="position:absolute;top:-5%;left:15%;" width="10" height="20"><use href="#conf-rect" style="--c:#FFBE0B;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-3%;left:45%;" width="12" height="12"><use href="#conf-circle" style="--c:#06A77D;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-7%;left:80%;" width="10" height="20"><use href="#conf-rect" style="--c:#FB8500;"/></svg>
+    <svg class="confetti-piece" style="position:absolute;top:-2%;left:60%;" width="12" height="12"><use href="#conf-circle" style="--c:#E63946;"/></svg>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100dvh;padding:2rem 1.5rem;text-align:center;gap:1.5rem;position:relative;z-index:3;">
+    <!-- Cake SVG -->
+    <svg id="cake-svg" width="220" height="200" viewBox="0 0 220 200" style="margin-bottom:0.5rem;">
+      <!-- Cake base -->
+      <ellipse cx="110" cy="170" rx="90" ry="25" fill="#F4A460" stroke="#1D1D1D" stroke-width="2.5"/>
+      <rect x="20" y="120" width="180" height="50" fill="#F4A460" stroke="#1D1D1D" stroke-width="2.5"/>
+      <ellipse cx="110" cy="120" rx="90" ry="25" fill="#DEB887" stroke="#1D1D1D" stroke-width="2.5"/>
+      <!-- Second tier -->
+      <ellipse cx="110" cy="115" rx="70" ry="20" fill="#FFB6C1" stroke="#1D1D1D" stroke-width="2.5"/>
+      <rect x="40" y="75" width="140" height="40" fill="#FFB6C1" stroke="#1D1D1D" stroke-width="2.5"/>
+      <ellipse cx="110" cy="75" rx="70" ry="20" fill="#FFC0CB" stroke="#1D1D1D" stroke-width="2.5"/>
+      <!-- Top tier -->
+      <ellipse cx="110" cy="70" rx="50" ry="15" fill="#E6E6FA" stroke="#1D1D1D" stroke-width="2.5"/>
+      <rect x="60" y="40" width="100" height="30" fill="#E6E6FA" stroke="#1D1D1D" stroke-width="2.5"/>
+      <ellipse cx="110" cy="40" rx="50" ry="15" fill="#F0F0FF" stroke="#1D1D1D" stroke-width="2.5"/>
+      <!-- Candles (positions around top) -->
+      <g id="candles-group">
+        <rect class="candle" data-candle="0" x="85" y="22" width="4" height="18" rx="1" fill="#FF006E" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="1" x="95" y="18" width="4" height="22" rx="1" fill="#3A86FF" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="2" x="105" y="16" width="4" height="24" rx="1" fill="#06A77D" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="3" x="115" y="18" width="4" height="22" rx="1" fill="#FB8500" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="4" x="125" y="22" width="4" height="18" rx="1" fill="#FFBE0B" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="5" x="90" y="28" width="4" height="12" rx="1" fill="#E63946" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="6" x="100" y="26" width="4" height="14" rx="1" fill="#FF006E" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="7" x="110" y="25" width="4" height="15" rx="1" fill="#3A86FF" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="8" x="120" y="26" width="4" height="14" rx="1" fill="#06A77D" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="9" x="130" y="28" width="4" height="12" rx="1" fill="#FB8500" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="10" x="75" y="30" width="4" height="10" rx="1" fill="#FFBE0B" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="11" x="82" y="32" width="4" height="8" rx="1" fill="#E63946" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="12" x="135" y="32" width="4" height="8" rx="1" fill="#FF006E" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="13" x="142" y="30" width="4" height="10" rx="1" fill="#3A86FF" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="14" x="68" y="35" width="4" height="5" rx="1" fill="#06A77D" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="15" x="148" y="35" width="4" height="5" rx="1" fill="#FB8500" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="16" x="88" y="35" width="4" height="5" rx="1" fill="#FFBE0B" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="17" x="98" y="34" width="4" height="6" rx="1" fill="#E63946" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="18" x="108" y="33" width="4" height="7" rx="1" fill="#FF006E" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="19" x="118" y="34" width="4" height="6" rx="1" fill="#3A86FF" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="20" x="128" y="35" width="4" height="5" rx="1" fill="#06A77D" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="21" x="138" y="35" width="4" height="5" rx="1" fill="#FB8500" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="22" x="72" y="38" width="4" height="3" rx="1" fill="#FFBE0B" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="23" x="78" y="38" width="4" height="3" rx="1" fill="#E63946" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="24" x="84" y="38" width="4" height="3" rx="1" fill="#FF006E" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="25" x="90" y="38" width="4" height="3" rx="1" fill="#3A86FF" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="26" x="96" y="38" width="4" height="3" rx="1" fill="#06A77D" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="27" x="102" y="38" width="4" height="3" rx="1" fill="#FB8500" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="28" x="108" y="38" width="4" height="3" rx="1" fill="#FFBE0B" stroke="#1D1D1D" stroke-width="1"/>
+        <rect class="candle" data-candle="29" x="114" y="38" width="4" height="3" rx="1" fill="#E63946" stroke="#1D1D1D" stroke-width="1"/>
+      </g>
+    </svg>
+
+    <div style="font-size:clamp(2rem,8vw,4rem);font-weight:900;color:var(--red);text-shadow:4px 4px 0px var(--border);">Sopla las velas</div>
+
+    <div style="width:100%;max-width:340px;">
+      <textarea class="editable-message" placeholder="Escribe aquí tu mensaje personal para José"></textarea>
+    </div>
+
+    <div style="font-size:0.9rem;font-weight:700;opacity:0.6;">— A las 00:00 del 9 de julio de 2026</div>
+  </div>
+</section>
+
+
+<script>
+// ===== UTILITIES =====
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// ===== PROGRESS RAIL =====
+const progressFill = document.getElementById('progressFill');
+function updateProgress() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressFill.style.height = pct + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+// ===== COUNTER ANIMATIONS =====
+function animateCounter(id, target, duration, suffix) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let start = 0;
+  const startTime = performance.now();
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    el.textContent = current.toLocaleString('es-ES') + (suffix || '');
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+let counter1Triggered = false;
+let counter2Triggered = false;
+
+// ===== CANDLE LIGHTING =====
+let candlesTriggered = false;
+function lightCandles() {
+  const candles = document.querySelectorAll('#candles-group .candle');
+  candles.forEach((c, i) => {
+    setTimeout(() => {
+      c.classList.add('lit');
+    }, i * 200);
+  });
+}
+
+// ===== CAROUSEL DOTS =====
+function setupCarousels() {
+  const carousels = document.querySelectorAll('.carousel');
+  carousels.forEach(carousel => {
+    const year = carousel.id.replace('carousel-', '');
+    const dots = document.querySelectorAll(`#dots-${year} .dot`);
+    const cards = carousel.querySelectorAll('.carousel-card');
+
+    function updateDots() {
+      const scrollLeft = carousel.scrollLeft;
+      const cardWidth = cards[0]?.offsetWidth || 0;
+      const gap = 16;
+      const index = Math.round(scrollLeft / (cardWidth + gap));
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+    }
+
+    carousel.addEventListener('scroll', updateDots, { passive: true });
+    updateDots();
+  });
+}
+
+// ===== INTERSECTION OBSERVER =====
+const observerOptions = { threshold: 0.5 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+
+      // Counters
+      if (id === 'macro-1' && !counter1Triggered) {
+        counter1Triggered = true;
+        animateCounter('counter-1', 2500, 2000, '');
+        document.querySelectorAll('#macro-1 .macro-person').forEach((p, i) => {
+          setTimeout(() => {
+            p.classList.add('visible');
+            setTimeout(() => p.classList.add('floating'), 600);
+          }, 150 + i * 200);
+        });
+      }
+      if (id === 'macro-2' && !counter2Triggered) {
+        counter2Triggered = true;
+        animateCounter('counter-2', 30, 1500, '');
+        const nokia = document.getElementById('tech-nokia');
+        const ia = document.getElementById('tech-ia');
+        if (nokia) { nokia.classList.add('visible'); setTimeout(() => nokia.classList.add('floating'), 800); }
+        setTimeout(() => {
+          if (ia) { ia.classList.add('visible'); setTimeout(() => ia.classList.add('floating'), 800); }
+        }, 350);
+      }
+
+      // Candles
+      if (id === 'closing' && !candlesTriggered) {
+        candlesTriggered = true;
+        setTimeout(lightCandles, 500);
+      }
+
+      // Vibration on year change
+      if (id.startsWith('year-') && id !== 'year-2026') {
+        if (navigator.vibrate) {
+          navigator.vibrate([20, 30, 20]);
+        }
+      }
+
+      // Show/hide year nav button with fade
+      const navBtn = document.querySelector('.year-nav-btn');
+      if (navBtn) {
+        const isYearScreen = id.startsWith('year-') && id !== 'year-2026';
+        if (isYearScreen && navBtn.style.display !== 'flex') {
+          navBtn.style.display = 'flex';
+          navBtn.style.animation = 'btn-fade-in 0.3s ease forwards';
+        } else if (!isYearScreen && navBtn.style.display === 'flex') {
+          navBtn.style.animation = 'btn-fade-out 0.3s ease forwards';
+          setTimeout(() => { navBtn.style.display = 'none'; }, 300);
+        }
+      }
+    }
+  });
+}, observerOptions);
+
+// Observe all screens
+document.querySelectorAll('.screen').forEach(screen => {
+  observer.observe(screen);
+});
+
+// ===== BTN PRESS ANIMATION =====
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.btn, .year-nav-btn');
+  if (!btn || !btn.onclick) return;
+
+  e.stopPropagation();
+  const handler = btn.onclick;
+
+  btn.classList.remove('pressed');
+  void btn.offsetWidth;
+  btn.classList.add('pressed');
+  btn.addEventListener('animationend', () => btn.classList.remove('pressed'), { once: true });
+
+  setTimeout(() => handler.call(btn, e), 280);
+}, true);
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  setupCarousels();
+  updateProgress();
+});
+</script>
+
+<!-- Year navigator button -->
+<button class="year-nav-btn" onclick="openYearNav()" aria-label="Ir a un año">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1D1D1D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+</button>
+
+<!-- Year navigator overlay -->
+<div class="year-nav-overlay" id="yearNavOverlay" onclick="closeYearNavOutside(event)">
+  <div class="year-nav-card">
+    <button class="year-nav-close" onclick="closeYearNav()">✕</button>
+    <div class="year-nav-header">
+      <h2>¿A qué año quieres viajar?</h2>
+      <span>1996 — 2025 · 30 cumpleaños</span>
+    </div>
+    <div class="year-nav-grid" id="yearNavGrid"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const grid = document.getElementById('yearNavGrid');
+  for (let year = 1996; year <= 2025; year++) {
+    const age = year - 1996;
+    const cell = document.createElement('button');
+    cell.className = 'year-nav-cell';
+    cell.innerHTML = `<span class="cell-year">${year}</span><span class="cell-age">${age} años</span>`;
+    cell.onclick = () => {
+      cell.classList.add('pressed');
+      setTimeout(() => { scrollToSection('year-' + year); closeYearNav(); }, 250);
+    };
+    grid.appendChild(cell);
+  }
+})();
+
+function openYearNav() {
+  document.getElementById('yearNavOverlay').classList.add('open');
+}
+function closeYearNav() {
+  document.getElementById('yearNavOverlay').classList.remove('open');
+}
+function closeYearNavOutside(e) {
+  if (e.target === document.getElementById('yearNavOverlay')) closeYearNav();
+}
+</script>
+
+</body>
+</html>
