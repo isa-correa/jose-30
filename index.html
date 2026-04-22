@@ -109,10 +109,6 @@ body {
   -webkit-appearance: none;
 }
 
-.btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0px var(--border);
-}
 @keyframes btn-press {
   0%   { transform: translate(0,0);     box-shadow: 5px 5px 0px var(--border); }
   35%  { transform: translate(3px,3px); box-shadow: 2px 2px 0px var(--border); }
@@ -121,6 +117,7 @@ body {
 }
 .btn.pressed {
   animation: btn-press 0.28s ease forwards;
+  transition: none;
 }
 
 .btn-green {
@@ -615,8 +612,37 @@ body {
 
 /* Responsive for desktop */
 @media (min-width: 768px) {
+  .carousel {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding: 0.75rem 1.5rem 1rem;
+    gap: 1rem;
+  }
   .carousel-card {
-    width: 320px;
+    flex: 1;
+    width: auto;
+    max-width: none;
+    scroll-snap-align: none;
+  }
+  .carousel-dots,
+  .hint {
+    display: none;
+  }
+  .carousel-card {
+    justify-content: space-between;
+    gap: 0;
+  }
+  .carousel-card .card-photos-row,
+  .carousel-card .card-photo-center-wrap {
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .carousel-card .card-row,
+  .carousel-card .card-text-body {
+    flex: 1;
+  }
+  .carousel-card .card-footer {
+    margin-top: auto;
   }
   .cover-content, .macro-content {
     padding: 2rem;
@@ -723,24 +749,73 @@ body {
     max-width:none;
   }
   .carousel-card {
-    height: min(780px, calc(100dvh - 130px));
+    height: min(500px, calc(100dvh - 140px));
+  }
+  .year-screen {
+    justify-content: flex-start;
+  }
+  .carousel-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
+  .carousel-group .carousel-dots,
+  .carousel-group .hint {
+    align-self: center;
   }
   .card-photos-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: row;
+    gap: 0.4rem;
+    align-items: flex-start;
+    background: white;
+    border: 2px solid var(--border);
+    box-shadow: 3px 3px 0px var(--border);
+    padding: 7px 7px 26px;
+    border-radius: 3px;
+    transform: rotate(-1deg);
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
   }
-  .card-polaroid {
-    max-width: 180px;
-    width: 180px;
+  .card-photos-row::before {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1.5deg);
+    width: 52px;
+    height: 15px;
+    background: rgba(255,190,11,0.65);
+    border: 1.5px solid var(--border);
+  }
+  .card-photos-row .card-polaroid {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+    transform: none;
+    z-index: auto;
+    width: 100px;
+    max-width: 100px;
     flex: none;
   }
-  .card-polaroid-alt {
-    transform: rotate(1.5deg);
+  .card-photos-row .card-polaroid-alt {
+    transform: none;
+    margin-top: 0;
+    z-index: auto;
+  }
+  .card-photos-row .card-washi-tape {
+    display: none;
   }
   .card-photos-row + .card-text-body,
+  .card-photos-row + .card-row,
   .card-photo-center-wrap + .card-text-body {
-    margin-top: 1rem;
+    margin-top: 1.75rem;
   }
 }
 
@@ -1172,6 +1247,7 @@ body {
     <div class="year-number">1996</div>
     <div class="badge year-badge">0 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-1996">
 
     <div class="carousel-card card card-sm">
@@ -1264,6 +1340,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="1997" id="year-1997">
@@ -1271,6 +1348,7 @@ body {
     <div class="year-number">1997</div>
     <div class="badge year-badge">1 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-1997">
 
     <div class="carousel-card card card-sm">
@@ -1363,6 +1441,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="1998" id="year-1998">
@@ -1370,6 +1449,7 @@ body {
     <div class="year-number">1998</div>
     <div class="badge year-badge">2 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-1998">
 
     <div class="carousel-card card card-sm">
@@ -1462,6 +1542,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="1999" id="year-1999">
@@ -1469,6 +1550,7 @@ body {
     <div class="year-number">1999</div>
     <div class="badge year-badge">3 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-1999">
 
     <div class="carousel-card card card-sm">
@@ -1561,6 +1643,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2000" id="year-2000">
@@ -1568,6 +1651,7 @@ body {
     <div class="year-number">2000</div>
     <div class="badge year-badge">4 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2000">
 
     <div class="carousel-card card card-sm">
@@ -1660,6 +1744,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2001" id="year-2001">
@@ -1667,6 +1752,7 @@ body {
     <div class="year-number">2001</div>
     <div class="badge year-badge">5 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2001">
 
     <div class="carousel-card card card-sm">
@@ -1759,6 +1845,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2002" id="year-2002">
@@ -1766,6 +1853,7 @@ body {
     <div class="year-number">2002</div>
     <div class="badge year-badge">6 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2002">
 
     <div class="carousel-card card card-sm">
@@ -1858,6 +1946,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2003" id="year-2003">
@@ -1865,6 +1954,7 @@ body {
     <div class="year-number">2003</div>
     <div class="badge year-badge">7 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2003">
 
     <div class="carousel-card card card-sm">
@@ -1957,6 +2047,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2004" id="year-2004">
@@ -1964,6 +2055,7 @@ body {
     <div class="year-number">2004</div>
     <div class="badge year-badge">8 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2004">
 
     <div class="carousel-card card card-sm">
@@ -2056,6 +2148,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2005" id="year-2005">
@@ -2063,6 +2156,7 @@ body {
     <div class="year-number">2005</div>
     <div class="badge year-badge">9 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2005">
 
     <div class="carousel-card card card-sm">
@@ -2155,6 +2249,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2006" id="year-2006">
@@ -2162,6 +2257,7 @@ body {
     <div class="year-number">2006</div>
     <div class="badge year-badge">10 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2006">
 
     <div class="carousel-card card card-sm">
@@ -2254,6 +2350,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2007" id="year-2007">
@@ -2261,6 +2358,7 @@ body {
     <div class="year-number">2007</div>
     <div class="badge year-badge">11 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2007">
 
     <div class="carousel-card card card-sm">
@@ -2353,6 +2451,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2008" id="year-2008">
@@ -2360,6 +2459,7 @@ body {
     <div class="year-number">2008</div>
     <div class="badge year-badge">12 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2008">
 
     <div class="carousel-card card card-sm">
@@ -2452,6 +2552,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2009" id="year-2009">
@@ -2459,6 +2560,7 @@ body {
     <div class="year-number">2009</div>
     <div class="badge year-badge">13 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2009">
 
     <div class="carousel-card card card-sm">
@@ -2551,6 +2653,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2010" id="year-2010">
@@ -2558,6 +2661,7 @@ body {
     <div class="year-number">2010</div>
     <div class="badge year-badge">14 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2010">
 
     <div class="carousel-card card card-sm">
@@ -2650,6 +2754,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2011" id="year-2011">
@@ -2657,6 +2762,7 @@ body {
     <div class="year-number">2011</div>
     <div class="badge year-badge">15 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2011">
 
     <div class="carousel-card card card-sm">
@@ -2749,6 +2855,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2012" id="year-2012">
@@ -2756,6 +2863,7 @@ body {
     <div class="year-number">2012</div>
     <div class="badge year-badge">16 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2012">
 
     <div class="carousel-card card card-sm">
@@ -2848,6 +2956,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2013" id="year-2013">
@@ -2855,6 +2964,7 @@ body {
     <div class="year-number">2013</div>
     <div class="badge year-badge">17 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2013">
 
     <div class="carousel-card card card-sm">
@@ -2947,6 +3057,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2014" id="year-2014">
@@ -2954,6 +3065,7 @@ body {
     <div class="year-number">2014</div>
     <div class="badge year-badge">18 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2014">
 
     <div class="carousel-card card card-sm">
@@ -3046,6 +3158,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2015" id="year-2015">
@@ -3053,6 +3166,7 @@ body {
     <div class="year-number">2015</div>
     <div class="badge year-badge">19 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2015">
 
     <div class="carousel-card card card-sm">
@@ -3145,6 +3259,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2016" id="year-2016">
@@ -3152,6 +3267,7 @@ body {
     <div class="year-number">2016</div>
     <div class="badge year-badge">20 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2016">
 
     <div class="carousel-card card card-sm">
@@ -3244,6 +3360,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2017" id="year-2017">
@@ -3251,6 +3368,7 @@ body {
     <div class="year-number">2017</div>
     <div class="badge year-badge">21 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2017">
 
     <div class="carousel-card card card-sm">
@@ -3343,6 +3461,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2018" id="year-2018">
@@ -3350,6 +3469,7 @@ body {
     <div class="year-number">2018</div>
     <div class="badge year-badge">22 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2018">
 
     <div class="carousel-card card card-sm">
@@ -3442,6 +3562,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2019" id="year-2019">
@@ -3449,6 +3570,7 @@ body {
     <div class="year-number">2019</div>
     <div class="badge year-badge">23 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2019">
 
     <div class="carousel-card card card-sm">
@@ -3541,6 +3663,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2020" id="year-2020">
@@ -3548,6 +3671,7 @@ body {
     <div class="year-number">2020</div>
     <div class="badge year-badge">24 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2020">
 
     <div class="carousel-card card card-sm">
@@ -3640,6 +3764,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2021" id="year-2021">
@@ -3647,6 +3772,7 @@ body {
     <div class="year-number">2021</div>
     <div class="badge year-badge">25 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2021">
 
     <div class="carousel-card card card-sm">
@@ -3739,6 +3865,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2022" id="year-2022">
@@ -3746,6 +3873,7 @@ body {
     <div class="year-number">2022</div>
     <div class="badge year-badge">26 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2022">
 
     <div class="carousel-card card card-sm">
@@ -3838,6 +3966,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2023" id="year-2023">
@@ -3845,6 +3974,7 @@ body {
     <div class="year-number">2023</div>
     <div class="badge year-badge">27 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2023">
 
     <div class="carousel-card card card-sm">
@@ -3937,6 +4067,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2024" id="year-2024">
@@ -3944,6 +4075,7 @@ body {
     <div class="year-number">2024</div>
     <div class="badge year-badge">28 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2024">
 
     <div class="carousel-card card card-sm">
@@ -4036,6 +4168,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <section class="screen year-screen" data-year="2025" id="year-2025">
@@ -4043,6 +4176,7 @@ body {
     <div class="year-number">2025</div>
     <div class="badge year-badge">29 años</div>
   </div>
+  <div class="carousel-group">
   <div class="carousel" id="carousel-2025">
 
     <div class="carousel-card card card-sm">
@@ -4135,6 +4269,7 @@ body {
     <div class="dot" data-i="3"></div>
   </div>
   <div class="hint">Desliza horizontalmente →</div>
+  </div>
 </section>
 
 <!-- SCREEN 35: CIERRE -->
